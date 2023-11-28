@@ -1,9 +1,7 @@
-function HomePage () {
-  
+
+function HomePage() {
   return (
-    <div>
-      Hello World!
-    </div>
+    <div>Hello World!</div>
   )
 }
 
