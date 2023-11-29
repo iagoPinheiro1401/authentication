@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import connect from 'next-connect'
 import Joi from 'joi'
+
+import createHandler from '../../../lib/middleware/nextConnect'
 
 import validate from '../../../lib/middleware/validation'
 import { signupUser } from '../../../modules/user/user.service'
@@ -13,7 +14,7 @@ const postSchema = Joi.object({
     telefone: Joi.number().required().min(8)
 })
 
-const signup = connect()
+const signup = createHandler()
    .post(validate({ body: postSchema }), (req, res) => {
         signupUser()
         res.status(200).json({ teste: 'ok'})
