@@ -22,6 +22,13 @@
         "react/react-in-jsx-scope ": "off",
         "quotes": ["error", "single"],
         "react/react-in-jsx-scope": "off",
-        "react/prop-types": "off"
+        "react/prop-types": "off",
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+              "devDependencies": true
+            }
+          ],
+        "no-unreachable": "off",
     }
 }
