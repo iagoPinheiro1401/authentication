@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import styled from 'styled-components'
+import { forwardRef } from 'react'
 
 const StytledInput = styled.input`
     padding: 6px 20px;
@@ -14,12 +15,13 @@ const StyledLabel = styled.p`
     margin-bottom: 5px;
 `
 
-export default function Input({ label, onChange, ...props }) {
+const Input = forwardRef(({ label, onChange, ...props }, ref) => {
     return(
         <>
             <StyledLabel>{label}</StyledLabel>
-            <StytledInput placeholder={label} {...props} onChange={onChange}/>
+            <StytledInput placeholder={label} {...props} onChange={onChange} ref={ref}/>
         </>
     )
-}
+})
 
+export default Input

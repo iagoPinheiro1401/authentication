@@ -1,6 +1,10 @@
 import styled from 'styled-components'
+import { useForm } from 'react-hook-form'
+import { joiResolver } from '@hookform/resolvers/joi'
 
 import Input from '../src/components/input/Input'
+
+import { signupSchema } from '../modules/user/user.schema'
 
 const Form = styled.form`
     display: flex;
@@ -18,16 +22,26 @@ const LabelTel = styled.p`
     margin-bottom: 5px;
 `
 function HomePage() {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: joiResolver(signupSchema)
+  })
+
+  const handleForm = (data) => {
+    console.log(data)
+  }
+  console.log(errors)
+
   return (
-    <Form>
-      <Input label="Nome"/>
-      <Input label="Email"/>
-      <Input label="Senha"/>
+    <Form onSubmit={handleSubmit(handleForm)}>
+      <Input label="Nome" {...register('nome')}/>
+      <Input label="Email" {...register('email')}/>
+      <Input label="Senha" {...register('senha')}/>
       <LabelTel>Telefone</LabelTel>
       <TelefoneConatiner>
-          <Input placeholder="ddd"/>
-          <Input placeholder="telefone"/>
+          <Input placeholder="ddd" {...register('ddd')}/>
+          <Input placeholder="telefone" {...register('telefone')}/>
       </TelefoneConatiner>
+      <button type="submit">Enviar</button>
     </Form>
   )
 }
