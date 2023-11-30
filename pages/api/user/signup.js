@@ -15,7 +15,7 @@ const signup = createHandler()
             id: user._id,
         }
         await req.session.save()
-        res.send({ ok: true })
+        res.status(201).send({ ok: true })
     } catch (err) {
         if (err.code === 11000) {
             return res.status(400).send({
