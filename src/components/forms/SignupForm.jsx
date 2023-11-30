@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 import axios from 'axios'
 import { useState } from 'react'
+import moment from 'moment'; // Importe a biblioteca moment
 
 import Input from '../input/Input'
 import Button from '../input/Button'
@@ -42,7 +43,11 @@ export default function SignupForm() {
     
           if (response.status === 201) {
             const { createdAt, updatedAt, lastLogin } = response.data;
-            setSignupInfo({ createdAt, updatedAt, lastLogin });
+            setSignupInfo({
+              createdAt: moment(createdAt).format('DD/MM/YYYY'),
+              updatedAt: moment(updatedAt).format('DD/MM/YYYY'),
+              lastLogin: moment(lastLogin).format('DD/MM/YYYY'),
+            });
           }
         } catch (err) {
           if (err.response?.data?.code === 11000) {
