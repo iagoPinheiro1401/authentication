@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
 
 import Input from '../src/components/input/Input'
+import Button from '../src/components/input/Button'
 
 import { signupSchema } from '../modules/user/user.schema'
 
@@ -33,15 +34,15 @@ function HomePage() {
 
   return (
     <Form onSubmit={handleSubmit(handleForm)}>
-      <Input label="Nome" {...register('nome')}/>
-      <Input label="Email" {...register('email')}/>
-      <Input label="Senha" {...register('senha')}/>
+      <Input label="Nome" {...register('nome')} error={errors.nome}/>
+      <Input label="Email" {...register('email')} error={errors.email}/>
+      <Input label="Senha" {...register('senha')} error={errors.senha}/>
       <LabelTel>Telefone</LabelTel>
       <TelefoneConatiner>
-          <Input placeholder="ddd" {...register('ddd')}/>
-          <Input placeholder="telefone" {...register('telefone')}/>
+          <Input placeholder="ddd" {...register('ddd')} error={errors.ddd}/>
+          <Input placeholder="telefone" {...register('telefone')} error={errors.telefone}/>
       </TelefoneConatiner>
-      <button type="submit">Enviar</button>
+      <Button type="submit">Enviar</Button>
     </Form>
   )
 }
