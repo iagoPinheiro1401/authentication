@@ -14,13 +14,15 @@ const Form = styled.form`
     flex-direction: column;
 `
 
+// ... imports existentes
+
 export default function LoginForm() {
 
     const { register, handleSubmit, formState: { errors }, setError } = useForm({
         resolver: joiResolver(loginSchema)
      })
 
-     const [loginInfo, setloginInfo] = useState(null)
+     const [loginInfo, setLoginInfo] = useState(null)
 
      const onSubmit = async (data) => {
         try {
@@ -31,7 +33,7 @@ export default function LoginForm() {
       
             if (response.status === 200) {
               const { createdAt, updatedAt, lastLogin } = response.data;
-              setloginInfo({ createdAt, updatedAt, lastLogin });
+              setLoginInfo({ createdAt, updatedAt, lastLogin });
             }
         } catch (err){
             if (err.response.data === 'password incorrect') {
@@ -49,8 +51,15 @@ export default function LoginForm() {
     return(
         <Form onSubmit={handleSubmit(onSubmit)}>
             <Input label="Email" {...register('email')} error={errors.email}/>
-            <Input  label="password" type="password" {...register('senha')} error={errors.senha}/>
+            <Input label="Senha" type="password" {...register('senha')} error={errors.senha}/>
             <Button>Entrar</Button>
+            {loginInfo && (
+              <div>
+                <p>Data de Criação: {loginInfo.createdAt}</p>
+                <p>Data de Atualização: {loginInfo.updatedAt}</p>
+                <p>Data do Último Login: {loginInfo.lastLogin}</p>
+              </div>
+            )}
         </Form>
     )
 }
