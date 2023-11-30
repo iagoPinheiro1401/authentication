@@ -11,6 +11,11 @@ const FormsContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+
+    @media (max-width: 650px) {
+      gap: 80px;
+      margin-top: 20px;
+    }
 `
 
 const ButtonState = styled.p`

@@ -54,6 +54,7 @@ export default function LoginForm() {
 
     return(
         <Form onSubmit={handleSubmit(onSubmit)}>
+            <h3>Login</h3>
             <Input label="Email" {...register('email')} error={errors.email}/>
             <Input label="Senha" type="password" {...register('senha')} error={errors.senha}/>
             <Button>Entrar</Button>

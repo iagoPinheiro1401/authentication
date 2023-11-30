@@ -13,6 +13,11 @@ import { signupSchema } from '../../../modules/user/user.schema'
 const TelefoneConatiner = styled.div`
     display: flex;
     gap: 10px;
+
+    @media (max-width: 650px) {
+      flex-direction: column;
+      gap: 0px;
+    }
 `
 
 const LabelTel = styled.p`
