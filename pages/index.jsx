@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
+import axios from 'axios'
 
 import Input from '../src/components/input/Input'
 import Button from '../src/components/input/Button'
@@ -23,14 +24,24 @@ const LabelTel = styled.p`
     margin-bottom: 5px;
 `
 function HomePage() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors }, setError } = useForm({
     resolver: joiResolver(signupSchema)
   })
 
-  const handleForm = (data) => {
-    console.log(data)
+  const handleForm = async (data) => {
+    try {
+      const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/user/signup`, data)
+      if ( status === 201) {
+        
+      }
+    } catch (err){
+      if (err.response.data.code === 11000) {
+        setError(err.response.data.duplicatedKey, {
+          type: 'duplicated'
+        })
+      }
+    }
   }
-  console.log(errors)
 
   return (
     <Form onSubmit={handleSubmit(handleForm)}>

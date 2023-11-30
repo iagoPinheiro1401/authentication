@@ -17,7 +17,12 @@ const signup = createHandler()
         await req.session.save()
         res.send({ ok: true })
     } catch (err) {
-        console.error(err)
+        if (err.code === 11000) {
+            return res.status(400).send({
+                 code: 11000,
+                 duplicatedKey: Object.keys(err.keyPattern)[0]
+            })
+        }
         throw err
     }
    })

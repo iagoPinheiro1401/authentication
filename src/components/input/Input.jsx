@@ -37,11 +37,11 @@ const errorMessage = {
     'string.empty': 'Este campo é obrigatório',
     'string.email': 'Digite um email válido',
     'number.base': 'Digite um número',
-    'number.unsafe': 'Digite um número válido'
+    'number.unsafe': 'Digite um número válido',
+    'duplicated': 'Email já registrado'
 }
 
 const Input = forwardRef(({ label, error, onChange, ...props }, ref) => {
-    console.log(error)
     return(
         <>
             <StyledLabel>{label}</StyledLabel>
