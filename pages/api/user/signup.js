@@ -10,12 +10,27 @@ import { ironConfig } from '../../../lib/middleware/ironSession'
 const signup = createHandler()
    .post(validate({ body: signupSchema}), async (req, res) => {
     try {
-        const user = await signupUser(req.body)
+        const user = await signupUser(req.body);
+  
+        // Adicionar datas ao objeto do usuário
+        const now = new Date();
+        user.createdAt = now.toISOString();
+        user.updatedAt = now.toISOString();
+        user.lastLogin = now.toISOString();
+  
+        // Salvar objeto do usuário
+        await user.save();
+  
         req.session.user = {
-            id: user._id,
-        }
-        await req.session.save()
-        res.status(201).send({ ok: true })
+          id: user._id,
+        };
+        await req.session.save();
+        res.status(201).send({
+          ok: true,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+          lastLogin: user.lastLogin,
+        });
     } catch (err) {
         if (err.code === 11000) {
             return res.status(400).send({
