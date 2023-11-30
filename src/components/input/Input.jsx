@@ -19,6 +19,7 @@ const StyledLabel = styled.p`
     font-weight: bold;
     font-size: 14px;
     margin-bottom: 5px;
+    margin-top: 20px;
 `
 
 const ErrorLabel = styled.span`
